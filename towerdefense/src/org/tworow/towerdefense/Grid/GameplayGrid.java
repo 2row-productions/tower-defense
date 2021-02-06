@@ -1,8 +1,11 @@
 package org.tworow.towerdefense.Grid;
 
-
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.tworow.towerdefense.Character.Attacker.Attacker;
+import org.tworow.towerdefense.Character.Attacker.AttackerFactory;
+import org.tworow.towerdefense.Character.Defender.Defender;
+import org.tworow.towerdefense.Character.Defender.DefenderFactory;
 
 public class GameplayGrid {
 
@@ -24,12 +27,26 @@ public class GameplayGrid {
     public void init(){
         grid.fill();
         generateCells();
+
+        // Thread.sleep();
+        AttackerFactory.createAttacker(this);
+        DefenderFactory.createDefender(this, 0, 0);
     }
 
     // Create individual cells where characters are instantiated
     public void generateCells() {
-
         int PADDING2 = PADDING;
+        /*for (int x = 0; x < cols; x++) {
+            Rectangle rect = new Rectangle(PADDING + (x * CELL_SIZE) + (PADDING * x), PADDING, CELL_SIZE, CELL_SIZE);
+            rect.setColor(Color.LIGHT_GRAY);
+            rect.fill();
+            for (int y = 0; y < rows; y++) {
+                Rectangle rect2 = new Rectangle(PADDING + (x * CELL_SIZE) + (x * PADDING), PADDING + (CELL_SIZE * y) + (PADDING * y), CELL_SIZE, CELL_SIZE);
+                rect2.setColor(Color.LIGHT_GRAY);
+                rect2.fill();
+            }
+        }
+    }*/
 
         for (int i=0; i<cols; i++){
             Rectangle cell1 = new Rectangle(PADDING2, PADDING, CELL_SIZE, CELL_SIZE);
@@ -67,7 +84,20 @@ public class GameplayGrid {
             }
 
             PADDING2 += CELL_SIZE;
+
         }
+    }
+
+    public void createAttacker() {
+        AttackerFactory.createAttacker(this);
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public int getRows() {
+        return rows;
     }
 
     public int getWidth(){
@@ -78,8 +108,8 @@ public class GameplayGrid {
         return rows * CELL_SIZE;
     }
 
-
-
-
+    public int getPadding() {
+        return PADDING;
+    }
 
 }

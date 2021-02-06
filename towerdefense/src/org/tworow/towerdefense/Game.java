@@ -1,5 +1,6 @@
 package org.tworow.towerdefense;
 
+import org.tworow.towerdefense.Character.Attacker.AttackerFactory;
 import org.tworow.towerdefense.Grid.GameplayGrid;
 
 public class Game {
@@ -13,6 +14,5 @@ public class Game {
         grid.init();
 
     }
-
 
 }
