@@ -4,8 +4,10 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.tworow.towerdefense.Character.Character;
 import org.tworow.towerdefense.Grid.GameplayGrid;
+import org.tworow.towerdefense.Projectile.Projectile;
 
 public class Defender extends Character {
+    private int damage = 1;
 
     public Defender(GameplayGrid grid, int health, int col, int row) {
         super(grid, health, col, row);
@@ -19,7 +21,7 @@ public class Defender extends Character {
 
     }
 
-    public void shoot() {
-
+    public Projectile shoot() {
+        return new Projectile(getGrid(), getCol(), getRow(), damage);
     }
 }

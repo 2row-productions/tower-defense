@@ -1,7 +1,5 @@
 package org.tworow.towerdefense;
 
-import org.tworow.towerdefense.Grid.GameplayGrid;
-
 public class Main {
 
     public static void main(String[] args){
@@ -12,3 +10,9 @@ public class Main {
 
     }
 }
+
+// TODO LIST:
+// Finish game when enemy reaches base (stop enemies aswell?)
+// Projectile
+// Create other two collision detector methods
+// Get rid of most magic numbers
