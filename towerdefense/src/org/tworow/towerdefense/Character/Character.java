@@ -39,4 +39,8 @@ abstract public class Character {
     public int getSize() {
         return size;
     }
+
+    public GameplayGrid getGrid() {
+        return grid;
+    }
 }

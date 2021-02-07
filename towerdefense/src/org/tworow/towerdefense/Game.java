@@ -12,6 +12,13 @@ public class Game {
 
         this.grid = new GameplayGrid(cols, rows);
         grid.init();
+        try {
+            grid.start();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 

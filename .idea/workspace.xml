@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8cc0e752-7c0a-431f-b3ce-d4c98ba1cc74" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/2row.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2row.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2row/org/tworow/towerdefense/Character/Attacker/Attacker.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/2row/org/tworow/towerdefense/Character/Attacker/Attacker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2row/org/tworow/towerdefense/Grid/GameplayGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/2row/org/tworow/towerdefense/Grid/GameplayGrid.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Character/Attacker/Attacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Character/Attacker/Attacker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Character/Attacker/AttackerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Character/Attacker/AttackerFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Character/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Character/Character.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Character/Defender/DefenderFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Character/Defender/DefenderFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Grid/GameplayGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Grid/GameplayGrid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/towerdefense/src/org/tworow/towerdefense/Main.java" afterDir="false" />
     </list>
@@ -79,5 +79,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
