@@ -6,6 +6,7 @@ import org.tworow.towerdefense.Character.Attacker.Attacker;
 import org.tworow.towerdefense.Character.Attacker.AttackerFactory;
 import org.tworow.towerdefense.Character.Defender.Defender;
 import org.tworow.towerdefense.Character.Defender.DefenderFactory;
+import org.tworow.towerdefense.CollisionDetector;
 
 public class GameplayGrid {
 
@@ -30,40 +31,8 @@ public class GameplayGrid {
     public void init(){
         grid.fill();
         generateCells();
-
-        // Thread.sleep();
-        //AttackerFactory.createAttacker(this);
-        DefenderFactory.createDefender(this, 2, 0);
-        DefenderFactory.createDefender(this, 1, 2);
     }
 
-    public void start() throws InterruptedException {
-
-        attackers = new Attacker[numberOfAttackers];
-        while (true) {
-            try {
-                Thread.sleep(500) ;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            for (int i = 0; i < numberOfAttackers; i++) {
-                if(attackers[i] == null) {
-                    attackers[i] = AttackerFactory.createAttacker(this);
-                    break;
-
-                }
-            }
-            for (int i = 0; i < numberOfAttackers; i++) {
-                if(attackers[i] != null) {
-                    attackers[i].move();
-
-                }
-            }
-
-        }
-
-    }
 
     // Create individual cells where characters are instantiated
     public void generateCells() {

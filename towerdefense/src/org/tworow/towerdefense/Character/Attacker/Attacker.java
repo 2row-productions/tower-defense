@@ -9,11 +9,14 @@ import org.tworow.towerdefense.Grid.GameplayGrid;
 public class Attacker extends Character {
 
     private Rectangle attacker;
+    private int moves;
+    private final int MOVE_LIMITER = (int) (Math.random() * 10) + 3;
 
 
     public Attacker(GameplayGrid grid, int health, int col, int row) {
         super(grid, health, col, row);
 
+        moves = 0;
         int attackerCol = col - getSize() + grid.getPadding();
         int attackerRow = row + grid.getPadding();
 
@@ -21,23 +24,16 @@ public class Attacker extends Character {
         attacker.setColor(Color.YELLOW);
         attacker.fill();
 
-
-        attacker.translate(-grid.getCellsize(), 0);
-
-
-
     }
 
     public void move() {
 
-        try {
-            Thread.sleep(200) ;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        moves++;
+
+        if(moves % MOVE_LIMITER == 0) {
+            goLeft();
+            attacker.translate(-(getGrid().getCellsize()), 0);
         }
-
-        attacker.translate(-(getGrid().getCellsize()), 0);
-
     }
 
 }

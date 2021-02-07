@@ -8,7 +8,5 @@ public class AttackerFactory {
 
         return new Attacker(grid, 4,  grid.getWidth(), (int) (Math.random() * grid.getRows()) * grid.getCellsize());
 
-
-
     }
 }

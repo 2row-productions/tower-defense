@@ -13,7 +13,10 @@ abstract public class Character {
     private GameplayGrid grid;
 
     public Character(GameplayGrid grid, int health, int col, int row) {
+        this.grid = grid;
         this.health = health;
+        this.col = col;
+        this.row = row;
     }
 
     public void takeDamage(int damage) {
@@ -30,6 +33,10 @@ abstract public class Character {
 
     public int getCol() {
         return col;
+    }
+
+    protected void goLeft(){
+        col -= size;
     }
 
     public int getRow() {
