@@ -30,7 +30,8 @@ public class GameplayGrid {
 
         // Thread.sleep();
         AttackerFactory.createAttacker(this);
-        DefenderFactory.createDefender(this, 0, 0);
+        DefenderFactory.createDefender(this, 2, 0);
+        //DefenderFactory.createDefender(this, 1, 0);
     }
 
     // Create individual cells where characters are instantiated
@@ -70,5 +71,7 @@ public class GameplayGrid {
     public int getPadding() {
         return PADDING;
     }
+
+    public int getCellsize() {return CELL_SIZE;}
 
 }

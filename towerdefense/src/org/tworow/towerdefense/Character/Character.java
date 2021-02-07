@@ -9,7 +9,7 @@ abstract public class Character {
     private int col;
     private int row;
     private int health;
-    private boolean isDead;
+    private boolean isDead = false;
     private GameplayGrid grid;
 
     public Character(GameplayGrid grid, int health, int col, int row) {

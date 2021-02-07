@@ -17,6 +17,9 @@ public class Attacker extends Character {
         Rectangle attacker = new Rectangle(attackerCol, attackerRow, getSize(), getSize());
         attacker.setColor(Color.YELLOW);
         attacker.fill();
+
+
+
     }
 
     public void move() {

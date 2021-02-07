@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args){
 
-       Game towerDefense = new Game(20,10);
+       Game towerDefense = new Game(10,5);
 
     }
 }
