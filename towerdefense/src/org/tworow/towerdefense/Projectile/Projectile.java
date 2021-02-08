@@ -23,13 +23,14 @@ public class Projectile {
         projectile.fill();
     }
 
+    public void updateProjectileCol(){
+        col += CELL_SIZE;
+    }
+
     public void move() {
         updateProjectileCol();
         projectile.translate(grid.getCellsize(), 0);
         System.out.println(col);
     }
 
-    public void updateProjectileCol(){
-        col += CELL_SIZE;
-    }
 }
