@@ -35,6 +35,7 @@ public class Attacker extends Character {
             getRectangle().translate(-(getGrid().getCellsize()), 0);
         }
 
+        isMoving = true;
     }
     public void stop(){
         isMoving = false;
