@@ -4,8 +4,8 @@ import org.tworow.towerdefense.Grid.GameplayGrid;
 
 public class DefenderFactory {
 
-    public static Defender createDefender(GameplayGrid grid, int col, int row ) {
+    public static Defender createDefender(GameplayGrid grid, int col, int row, int damage ) {
 
-        return new Defender(grid, 4, col * grid.getCellsize(), row * grid.getCellsize());
+        return new Defender(grid, 4, col * grid.getCellsize(), row * grid.getCellsize(), damage);
     }
 }

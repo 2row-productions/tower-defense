@@ -7,21 +7,20 @@ import org.tworow.towerdefense.Grid.GameplayGrid;
 import org.tworow.towerdefense.Projectile.Projectile;
 
 public class Defender extends Character {
-    private int damage = 1;
 
-    public Defender(GameplayGrid grid, int health, int col, int row) {
-        super(grid, health, col, row);
+    public Defender(GameplayGrid grid, int health, int col, int row, int damage) {
+        super(grid, health, col, row, damage);
 
         int defenderCol = col + grid.getPadding();
         int defenderRow = row + grid.getPadding();
 
-        Rectangle defender = new Rectangle(defenderCol, defenderRow, getSize(), getSize());
-        defender.setColor(Color.GREEN);
-        defender.fill();
+        setRectangle(new Rectangle(defenderCol, defenderRow, getSize(), getSize()));
+        getRectangle().setColor(Color.GREEN);
+        getRectangle().fill();
 
     }
 
     public Projectile shoot() {
-        return new Projectile(getGrid(), getCol(), getRow(), damage);
+        return new Projectile(getGrid(), getCol(), getRow(), getDamage());
     }
 }

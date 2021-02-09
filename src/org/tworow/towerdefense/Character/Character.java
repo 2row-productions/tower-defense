@@ -1,7 +1,9 @@
 package org.tworow.towerdefense.Character;
 
-import org.tworow.towerdefense.Game;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.tworow.towerdefense.Grid.GameplayGrid;
+
+import java.awt.*;
 
 abstract public class Character {
 
@@ -12,12 +14,14 @@ abstract public class Character {
     private boolean isDead = false;
     private int damage;
     private GameplayGrid grid;
+    private Rectangle rectangle;
 
-    public Character(GameplayGrid grid, int health, int col, int row) {
+    public Character(GameplayGrid grid, int health, int col, int row, int damage) {
         this.grid = grid;
         this.health = health;
         this.col = col;
         this.row = row;
+        this.damage = damage;
     }
 
     public void takeDamage(int damage) {
@@ -29,14 +33,15 @@ abstract public class Character {
     }
 
     public boolean isDead() {
-        return isDead;
+        return health == 0;
     }
+
 
     public int getCol() {
         return col;
     }
 
-    protected void goLeft(){
+    protected void updateCol(){
         col -= size;
     }
 
@@ -48,7 +53,19 @@ abstract public class Character {
         return size;
     }
 
+    public int getDamage() {
+        return damage;
+    }
+
     public GameplayGrid getGrid() {
         return grid;
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
     }
 }

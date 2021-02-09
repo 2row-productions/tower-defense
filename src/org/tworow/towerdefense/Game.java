@@ -7,15 +7,19 @@ import org.tworow.towerdefense.Character.Defender.DefenderFactory;
 import org.tworow.towerdefense.Grid.GameplayGrid;
 import org.tworow.towerdefense.Projectile.Projectile;
 
+import javax.lang.model.element.Element;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+
 public class Game {
 
     private GameplayGrid grid;
     private CollisionDetector collisionDetector;
-    private int maxNumbersOfAttackers = 5;
-    private int maxNumberOfDefenders = 5;
-    private Attacker[] attackers;
-    private Defender[] defenders;
-    private Projectile[] projectiles;
+    private LinkedList<Attacker> attackers;
+    private LinkedList<Defender> defenders;
+    private LinkedList<Projectile> projectiles;
+    private boolean isGameOver;
 
     public Game(int cols, int rows) {
 
@@ -31,61 +35,103 @@ public class Game {
     public void start() {
 
         // create empty array of defenders
-        defenders = new Defender[maxNumberOfDefenders];
+        defenders = new LinkedList<>();
 
-        // defenders test
-        defenders[0] = DefenderFactory.createDefender(grid, 2, 0);
-        defenders[1] = DefenderFactory.createDefender(grid, 1, 2);
+        // defenders test (gonna be handled by mouse input)
+        defenders.add(DefenderFactory.createDefender(grid, 2, 0, 2));
+        defenders.add(DefenderFactory.createDefender(grid, 1, 2, 2));
+
 
         // create empty array of attackers
-        attackers = new Attacker[maxNumbersOfAttackers];
+        attackers = new LinkedList<>();
 
-        projectiles = new Projectile[maxNumberOfDefenders];
+        // create empty array of projectiles
+        projectiles = new LinkedList<>();
 
         while (true) {
+
             try {
                 Thread.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
-            for (int i=0; i < maxNumberOfDefenders; i++) {
+            //for (Defender d : defenders) {
+            //    d.shoot();
+            //}
 
-                if (defenders[i] != null) {
-                    projectiles[i] = defenders[i].shoot();
-                }
-            }
+            Projectile p = new Projectile(grid, 0, 0, 2);
+            p.move();
+            //for (Projectile p : projectiles) {
+             //   p.move();
+            //}
 
-            for (int i = 0; i < projectiles.length; i++) {
-                if (projectiles[i] != null) {
-                    projectiles[i].move();
-                }
-            }
-
-            // instantiate attackers
-            for (int i = 0; i < maxNumbersOfAttackers; i++) {
-
-                if(attackers[i] == null) {
-
-                    attackers[i] = AttackerFactory.createAttacker(grid);
-                    break;
-                }
-            }
+            // While game is not over, instantiate attackers
+            attackers.add(AttackerFactory.createAttacker(grid));
 
             // instantiate collision detector
             collisionDetector = new CollisionDetector();
 
             // move attackers
-            for (int i = 0; i < maxNumbersOfAttackers; i++) {
+            for (Attacker a : attackers) {
 
-                if(attackers[i] != null) {
-                    attackers[i].move();
+                a.move();
 
-                    // check if any attacker reached base
-                    collisionDetector.checkBase(attackers[i]);
+                for (Defender d : defenders) {
+                    if (collisionDetector.checkDefender(a, d)) {
+                        a.stop();
+
+                        while(!d.isDead()) {
+                            d.takeDamage(a.getDamage());
+                            System.out.println("test");
+                        }
+
+                        if (d.isDead()) {
+                            defenders.remove(d);
+                            d.getRectangle().delete();
+                        }
+
+                        if (a.isDead()) {
+                            attackers.remove(a);
+                            a.getRectangle().delete();
+                        }
+
+                        a.move();
+                    }
                 }
-            }
 
+
+                if (collisionDetector.checkBase(a)) {
+                    gameOver();
+                }
+
+            }
         }
     }
+
+    public void gameOver() {
+        isGameOver = true;
+    }
+
+   /* @Override
+    public Iterator iterator() {
+        current = min;
+        return new Iterator() {
+
+            @Override
+            public boolean hasNext() {
+                return current <= max;
+            }
+
+            @Override
+            public Integer next() {
+                return current++;
+            }
+
+            @Override
+            public void remove(){
+
+            }
+        };
+    } */
 }

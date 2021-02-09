@@ -11,18 +11,18 @@ public class Attacker extends Character {
     private Rectangle attacker;
     private int moves;
     private final int MOVE_LIMITER = (int) (Math.random() * 10) + 3;
+    private boolean isMoving = true;
 
-
-    public Attacker(GameplayGrid grid, int health, int col, int row) {
-        super(grid, health, col, row);
+    public Attacker(GameplayGrid grid, int health, int col, int row, int damage) {
+        super(grid, health, col, row, damage);
 
         moves = 0;
         int attackerCol = col - getSize() + grid.getPadding();
         int attackerRow = row + grid.getPadding();
 
-        attacker = new Rectangle(attackerCol, attackerRow, getSize(), getSize());
-        attacker.setColor(Color.YELLOW);
-        attacker.fill();
+        setRectangle(new Rectangle(attackerCol, attackerRow, getSize(), getSize()));
+        getRectangle().setColor(Color.YELLOW);
+        getRectangle().fill();
 
     }
 
@@ -30,10 +30,14 @@ public class Attacker extends Character {
 
         moves++;
 
-        if(moves % MOVE_LIMITER == 0) {
-            goLeft();
-            attacker.translate(-(getGrid().getCellsize()), 0);
+        if (moves % MOVE_LIMITER == 0 && isMoving) {
+            updateCol();
+            getRectangle().translate(-(getGrid().getCellsize()), 0);
         }
+
+    }
+    public void stop(){
+        isMoving = false;
     }
 
 }

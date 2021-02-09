@@ -14,12 +14,15 @@ public class CollisionDetector {
 
     }
 
-    public void checkBase(Attacker attacker) {
+    public boolean checkBase(Attacker attacker) {
 
-        if (attacker.getCol() <= 0) {
-            // finishGame();
-            System.out.println("Finish Game!");
-        }
+        return attacker.getCol() <= 0;
+    }
+
+    public boolean checkDefender(Attacker attacker, Defender defender) {
+        //if attacker collides with defender --> stop moving;
+        return attacker.getCol() == defender.getCol() + defender.getSize()
+                && attacker.getRow() == defender.getRow();
     }
 
 }
