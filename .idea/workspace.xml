@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d8f95f8-19d8-4c1d-93f7-b457a474a4c5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Attacker/Attacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Attacker/Attacker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Character.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Defender/Defender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Defender/Defender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Defender/DefenderFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Defender/DefenderFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Projectile/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Projectile/Projectile.java" afterDir="false" />
-    </list>
+    <list default="true" id="c284add5-44fd-4a13-a1d4-6bb11557a83b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,125 +10,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1oDIYQO1DpzBntB6mYWfW6QhOGJ" />
-  <component name="ProjectViewState">
-    <option name="showLibraryContents" value="true" />
-  </component>
+  <component name="ProjectId" id="1oItx2WgIf8wvAos22sSSbQ8Bii" />
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.detected.package.tslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.tworow.towerdefense.Main" />
-      <module name="towerdefense" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.tworow.towerdefense.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0d8f95f8-19d8-4c1d-93f7-b457a474a4c5" name="Default Changelist" comment="" />
-      <created>1612814783639</created>
+      <created>1612986176525</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1612814783639</updated>
-      <workItem from="1612814784682" duration="349000" />
-      <workItem from="1612866041836" duration="1554000" />
-      <workItem from="1612898194245" duration="17039000" />
+      <updated>1612986176525</updated>
     </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="773" y="224" key="#com.intellij.ide.util.MemberChooser" timestamp="1612912457604">
-      <screen x="0" y="23" width="1920" height="977" />
-    </state>
-    <state x="773" y="224" key="#com.intellij.ide.util.MemberChooser/0.23.1920.977@0.23.1920.977" timestamp="1612912457604" />
-    <state width="1878" height="223" key="GridCell.Tab.0.bottom" timestamp="1612915853791">
-      <screen x="0" y="23" width="1920" height="977" />
-    </state>
-    <state width="1878" height="223" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1612915853791" />
-    <state width="1878" height="223" key="GridCell.Tab.0.center" timestamp="1612915853791">
-      <screen x="0" y="23" width="1920" height="977" />
-    </state>
-    <state width="1878" height="223" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1612915853791" />
-    <state width="1878" height="223" key="GridCell.Tab.0.left" timestamp="1612915853791">
-      <screen x="0" y="23" width="1920" height="977" />
-    </state>
-    <state width="1878" height="223" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1612915853791" />
-    <state width="1878" height="223" key="GridCell.Tab.0.right" timestamp="1612915853791">
-      <screen x="0" y="23" width="1920" height="977" />
-    </state>
-    <state width="1878" height="223" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1612915853791" />
-    <state width="1878" height="223" key="GridCell.Tab.1.bottom" timestamp="1612915773826">
-      <screen x="0" y="23" width="1920" height="977" />
-    </state>
-    <state width="1878" height="223" key="GridCell.Tab.1.bottom/0.23.1920.977@0.23.1920.977" timestamp="1612915773826" />
-    <state width="1878" height="223" key="GridCell.Tab.1.center" timestamp="1612915773826">
-      <screen x="0" y="23" width="1920" height="977" />
-    </state>
-    <state width="1878" height="223" key="GridCell.Tab.1.center/0.23.1920.977@0.23.1920.977" timestamp="1612915773826" />
-    <state width="1878" height="223" key="GridCell.Tab.1.left" timestamp="1612915773826">
-      <screen x="0" y="23" width="1920" height="977" />
-    </state>
-    <state width="1878" height="223" key="GridCell.Tab.1.left/0.23.1920.977@0.23.1920.977" timestamp="1612915773826" />
-    <state width="1878" height="223" key="GridCell.Tab.1.right" timestamp="1612915773826">
-      <screen x="0" y="23" width="1920" height="977" />
-    </state>
-    <state width="1878" height="223" key="GridCell.Tab.1.right/0.23.1920.977@0.23.1920.977" timestamp="1612915773826" />
-    <state x="132" y="123" key="new project wizard" timestamp="1612872935458">
-      <screen x="0" y="23" width="1920" height="977" />
-    </state>
-    <state x="132" y="123" key="new project wizard/0.23.1920.977@0.23.1920.977" timestamp="1612872935458" />
   </component>
 </project>
