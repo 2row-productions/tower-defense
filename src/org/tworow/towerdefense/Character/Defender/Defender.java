@@ -14,10 +14,10 @@ public class Defender extends Character {
         int defenderCol = col + grid.getPadding();
         int defenderRow = row + grid.getPadding();
 
-        setRectangle(new Rectangle(defenderCol, defenderRow, getSize(), getSize()));
-        getRectangle().setColor(Color.GREEN);
-        getRectangle().fill();
-
+        Rectangle shape = new Rectangle(defenderCol, defenderRow, getSize(), getSize());
+        shape.setColor(Color.GREEN);
+        shape.fill();
+        setShape(shape);
     }
 
     public Projectile shoot() {

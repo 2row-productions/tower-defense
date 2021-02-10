@@ -8,7 +8,6 @@ import org.tworow.towerdefense.Grid.GameplayGrid;
 
 public class Attacker extends Character {
 
-    private Rectangle attacker;
     private int moves;
     private final int MOVE_LIMITER = (int) (Math.random() * 10) + 3;
     private boolean isMoving = true;
@@ -20,10 +19,10 @@ public class Attacker extends Character {
         int attackerCol = col - getSize() + grid.getPadding();
         int attackerRow = row + grid.getPadding();
 
-        setRectangle(new Rectangle(attackerCol, attackerRow, getSize(), getSize()));
-        getRectangle().setColor(Color.YELLOW);
-        getRectangle().fill();
-
+        Rectangle shape = new Rectangle(attackerCol, attackerRow, getSize(), getSize());
+        shape.setColor(Color.YELLOW);
+        shape.fill();
+        setShape(shape);
     }
 
     public void move() {
@@ -32,7 +31,7 @@ public class Attacker extends Character {
 
         if (moves % MOVE_LIMITER == 0 && isMoving) {
             updateCol();
-            getRectangle().translate(-(getGrid().getCellsize()), 0);
+            getShape().translate(-(getGrid().getCellsize()), 0);
         }
 
         isMoving = true;

@@ -22,6 +22,11 @@
     <list default="true" id="0d8f95f8-19d8-4c1d-93f7-b457a474a4c5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Attacker/Attacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Attacker/Attacker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Character.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Defender/Defender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Defender/Defender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Defender/DefenderFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Defender/DefenderFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Projectile/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Projectile/Projectile.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +97,7 @@
       <updated>1612814783639</updated>
       <workItem from="1612814784682" duration="349000" />
       <workItem from="1612866041836" duration="1554000" />
-      <workItem from="1612898194245" duration="15241000" />
+      <workItem from="1612898194245" duration="17039000" />
     </task>
     <servers />
   </component>
@@ -115,22 +120,38 @@
       <screen x="0" y="23" width="1920" height="977" />
     </state>
     <state x="773" y="224" key="#com.intellij.ide.util.MemberChooser/0.23.1920.977@0.23.1920.977" timestamp="1612912457604" />
-    <state width="1878" height="223" key="GridCell.Tab.0.bottom" timestamp="1612913579511">
+    <state width="1878" height="223" key="GridCell.Tab.0.bottom" timestamp="1612915853791">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="1878" height="223" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1612913579511" />
-    <state width="1878" height="223" key="GridCell.Tab.0.center" timestamp="1612913579511">
+    <state width="1878" height="223" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1612915853791" />
+    <state width="1878" height="223" key="GridCell.Tab.0.center" timestamp="1612915853791">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="1878" height="223" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1612913579511" />
-    <state width="1878" height="223" key="GridCell.Tab.0.left" timestamp="1612913579510">
+    <state width="1878" height="223" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1612915853791" />
+    <state width="1878" height="223" key="GridCell.Tab.0.left" timestamp="1612915853791">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="1878" height="223" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1612913579510" />
-    <state width="1878" height="223" key="GridCell.Tab.0.right" timestamp="1612913579511">
+    <state width="1878" height="223" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1612915853791" />
+    <state width="1878" height="223" key="GridCell.Tab.0.right" timestamp="1612915853791">
       <screen x="0" y="23" width="1920" height="977" />
     </state>
-    <state width="1878" height="223" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1612913579511" />
+    <state width="1878" height="223" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1612915853791" />
+    <state width="1878" height="223" key="GridCell.Tab.1.bottom" timestamp="1612915773826">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state width="1878" height="223" key="GridCell.Tab.1.bottom/0.23.1920.977@0.23.1920.977" timestamp="1612915773826" />
+    <state width="1878" height="223" key="GridCell.Tab.1.center" timestamp="1612915773826">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state width="1878" height="223" key="GridCell.Tab.1.center/0.23.1920.977@0.23.1920.977" timestamp="1612915773826" />
+    <state width="1878" height="223" key="GridCell.Tab.1.left" timestamp="1612915773826">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state width="1878" height="223" key="GridCell.Tab.1.left/0.23.1920.977@0.23.1920.977" timestamp="1612915773826" />
+    <state width="1878" height="223" key="GridCell.Tab.1.right" timestamp="1612915773826">
+      <screen x="0" y="23" width="1920" height="977" />
+    </state>
+    <state width="1878" height="223" key="GridCell.Tab.1.right/0.23.1920.977@0.23.1920.977" timestamp="1612915773826" />
     <state x="132" y="123" key="new project wizard" timestamp="1612872935458">
       <screen x="0" y="23" width="1920" height="977" />
     </state>

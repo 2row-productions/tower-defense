@@ -7,9 +7,6 @@ import org.tworow.towerdefense.Character.Defender.DefenderFactory;
 import org.tworow.towerdefense.Grid.GameplayGrid;
 import org.tworow.towerdefense.Projectile.Projectile;
 
-import javax.lang.model.element.Element;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Game {
@@ -81,23 +78,24 @@ public class Game {
                     if (collisionDetector.checkDefender(a, d)) {
                         a.stop();
 
-                        while(!d.isDead()) {
+                        if (!d.isDead()) {
                             d.takeDamage(a.getDamage());
-                            System.out.println("test");
+                            System.out.println("DAMAGE!");
+
+                            if (d.isDead()) {
+                                defenders.remove(d);
+                                d.getShape().delete();
+                                a.move();
+                            }
+
+                            if (a.isDead()) {
+                                attackers.remove(a);
+                                a.getShape().delete();
+                            }
                         }
 
-                        if (d.isDead()) {
-                            defenders.remove(d);
-                            d.getRectangle().delete();
-                        }
-
-                        if (a.isDead()) {
-                            attackers.remove(a);
-                            a.getRectangle().delete();
-                        }
-
-                        a.move();
                     }
+
                 }
 
 

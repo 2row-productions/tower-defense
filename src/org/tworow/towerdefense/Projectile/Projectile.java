@@ -32,7 +32,6 @@ public class Projectile {
     }
 
     public void move() {
-        System.out.println(col);
         updateProjectileCol();
         projectile.translate(getGrid().getCellsize(), 0);
     }

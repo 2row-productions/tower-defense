@@ -14,7 +14,7 @@ abstract public class Character {
     private boolean isDead = false;
     private int damage;
     private GameplayGrid grid;
-    private Rectangle rectangle;
+    private Rectangle shape;
 
     public Character(GameplayGrid grid, int health, int col, int row, int damage) {
         this.grid = grid;
@@ -25,7 +25,7 @@ abstract public class Character {
     }
 
     public void takeDamage(int damage) {
-        health = getHealth() - damage;
+        health -= damage;
     }
 
     public int getHealth() {
@@ -61,11 +61,11 @@ abstract public class Character {
         return grid;
     }
 
-    public Rectangle getRectangle() {
-        return rectangle;
+    public Rectangle getShape() {
+        return shape;
     }
 
-    public void setRectangle(Rectangle rectangle) {
-        this.rectangle = rectangle;
+    public void setShape(Rectangle shape) {
+        this.shape = shape;
     }
 }
