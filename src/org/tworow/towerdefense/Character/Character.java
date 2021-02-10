@@ -7,7 +7,7 @@ import java.awt.*;
 
 abstract public class Character {
 
-    private int size = 50;
+    private int CELL_SIZE = 50;
     private int col;
     private int row;
     private int health;
@@ -42,15 +42,17 @@ abstract public class Character {
     }
 
     protected void updateCol(){
-        col -= size;
+        col -= CELL_SIZE/20;
     }
 
     public int getRow() {
         return row;
     }
 
+
+
     public int getSize() {
-        return size;
+        return CELL_SIZE;
     }
 
     public int getDamage() {

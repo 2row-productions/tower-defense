@@ -31,7 +31,7 @@ public class Attacker extends Character {
 
         if (moves % MOVE_LIMITER == 0 && isMoving) {
             updateCol();
-            getShape().translate(-(getGrid().getCellsize()), 0);
+            getShape().translate(-(getGrid().getCellsize() / 20), 0);
         }
 
         isMoving = true;

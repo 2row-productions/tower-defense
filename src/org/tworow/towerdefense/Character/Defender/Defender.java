@@ -20,7 +20,10 @@ public class Defender extends Character {
         setShape(shape);
     }
 
+
+
     public Projectile shoot() {
         return new Projectile(getGrid(), getCol(), getRow(), getDamage());
+
     }
 }

@@ -9,7 +9,7 @@ public class Projectile {
     private int damage;
     private int col;
     private int row;
-    private Rectangle projectile;
+    private Rectangle shape;
     private GameplayGrid grid;
 
     public Projectile(GameplayGrid grid, int col, int row, int damage) {
@@ -18,9 +18,10 @@ public class Projectile {
         this.col = col;
         this.row = row;
 
-        projectile = new Rectangle(col, row, CELL_SIZE, CELL_SIZE);
-        projectile.setColor(Color.BLACK);
-        projectile.fill();
+        Rectangle shape = new Rectangle(col, row + grid.getCellsize()/2 + grid.getPadding()/2, CELL_SIZE, CELL_SIZE);
+        shape.setColor(Color.BLACK);
+        shape.fill();
+        this.shape = shape;
     }
 
     public GameplayGrid getGrid() {
@@ -28,12 +29,34 @@ public class Projectile {
     }
 
     public void updateProjectileCol(){
-        col += CELL_SIZE;
+        // this operation has to return 2
+        // be careful changing cell size
+        // we don´t know what we did, but it works xD
+        col += (CELL_SIZE/(grid.getCellsize()/CELL_SIZE));
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCellSize() {
+        return CELL_SIZE;
     }
 
     public void move() {
         updateProjectileCol();
-        projectile.translate(getGrid().getCellsize(), 0);
+        shape.translate(getGrid().getCellsize()/20 , 0);
     }
 
+    public Rectangle getShape() {
+        return shape;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
 }

@@ -31,11 +31,13 @@ public class Game {
 
     public void start() {
 
+        int counter = 0;
+
         // create empty array of defenders
         defenders = new LinkedList<>();
 
         // defenders test (gonna be handled by mouse input)
-        defenders.add(DefenderFactory.createDefender(grid, 2, 0, 2));
+        defenders.add(DefenderFactory.createDefender(grid, 0, 0, 2));
         defenders.add(DefenderFactory.createDefender(grid, 1, 2, 2));
 
 
@@ -45,43 +47,66 @@ public class Game {
         // create empty array of projectiles
         projectiles = new LinkedList<>();
 
+        // instantiate collision detector
+        collisionDetector = new CollisionDetector();
+
         while (true) {
 
             try {
-                Thread.sleep(200);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
-            //for (Defender d : defenders) {
-            //    d.shoot();
-            //}
 
-            Projectile p = new Projectile(grid, 0, 0, 2);
-            p.move();
-            //for (Projectile p : projectiles) {
-             //   p.move();
-            //}
-
+            counter++;
             // While game is not over, instantiate attackers
-            attackers.add(AttackerFactory.createAttacker(grid));
+            if (counter % 300 == 0) {
+                attackers.add(AttackerFactory.createAttacker(grid));
+            }
+            // Shoot (instantiate projectiles)
+            for (Defender d : defenders) {
+                if(counter % 300 == 0) {
+                projectiles.add(d.shoot());
+                }
+            }
 
-            // instantiate collision detector
-            collisionDetector = new CollisionDetector();
+            // Move projectiles
+            for (Projectile pr : projectiles) {
+                    if (collisionDetector.checkLimit(pr, grid)){
+                        projectiles.remove(pr);
+                        pr.getShape().delete();
+                    }
+                    pr.move();
+                // check if projectile hit an attacker
+                for (Attacker a : attackers) {
+                    if (collisionDetector.checkProjectile(pr, a)) {
+                        System.out.println("Vai toma sua gostosa");
+                        a.takeDamage(pr.getDamage());
+                        projectiles.remove(pr);
+                        pr.getShape().delete();
+                        if (a.isDead()){
+                           attackers.remove(a);
+                           a.getShape().delete();
+                        }
+                    }
+                }
+            }
 
-            // move attackers
             for (Attacker a : attackers) {
-
+                // move attackers
                 a.move();
 
+                // check if attacker hit defender
                 for (Defender d : defenders) {
                     if (collisionDetector.checkDefender(a, d)) {
                         a.stop();
 
                         if (!d.isDead()) {
-                            d.takeDamage(a.getDamage());
-                            System.out.println("DAMAGE!");
+                            if (counter % 30 == 0) {
+                                d.takeDamage(a.getDamage());
 
+                            }
                             if (d.isDead()) {
                                 defenders.remove(d);
                                 d.getShape().delete();
@@ -93,14 +118,18 @@ public class Game {
                                 a.getShape().delete();
                             }
                         }
-
                     }
-
                 }
 
 
                 if (collisionDetector.checkBase(a)) {
+                    System.out.println("Morte por out of bounds");
+                    attackers.remove(a);
+                    System.out.println("Removed");
+                    a.getShape().delete();
+                    System.out.println("Deleted");
                     gameOver();
+                    System.out.println("Game over");
                 }
 
             }
