@@ -38,9 +38,10 @@ public class Game {
 
         // defenders test (gonna be handled by mouse input)
         defenders.add(DefenderFactory.createDefender(grid, 0, 0, 2));
-        defenders.add(DefenderFactory.createDefender(grid, 1, 2, 2));
-
-
+        //defenders.add(DefenderFactory.createDefender(grid, 1, 2, 2));
+        //defenders.add(DefenderFactory.createDefender(grid, 3, 1, 2));
+        //defenders.add(DefenderFactory.createDefender(grid, 2, 3, 2));
+        defenders.add(DefenderFactory.createDefender(grid, 4, 4, 2));
         // create empty array of attackers
         attackers = new LinkedList<>();
 
@@ -78,6 +79,7 @@ public class Game {
                         pr.getShape().delete();
                     }
                     pr.move();
+
                 // check if projectile hit an attacker
                 for (Attacker a : attackers) {
                     if (collisionDetector.checkProjectile(pr, a)) {
@@ -88,6 +90,7 @@ public class Game {
                         if (a.isDead()){
                            attackers.remove(a);
                            a.getShape().delete();
+
                         }
                     }
                 }
@@ -111,17 +114,16 @@ public class Game {
                                 defenders.remove(d);
                                 d.getShape().delete();
                                 a.move();
-                            }
 
+                            }
                             if (a.isDead()) {
                                 attackers.remove(a);
                                 a.getShape().delete();
+
                             }
                         }
                     }
                 }
-
-
                 if (collisionDetector.checkBase(a)) {
                     System.out.println("Morte por out of bounds");
                     attackers.remove(a);
@@ -131,7 +133,6 @@ public class Game {
                     gameOver();
                     System.out.println("Game over");
                 }
-
             }
         }
     }
