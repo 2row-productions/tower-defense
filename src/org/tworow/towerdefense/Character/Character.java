@@ -49,7 +49,7 @@ abstract public class Character {
         return row;
     }
 
-    
+
 
     public int getSize() {
         return CELL_SIZE;

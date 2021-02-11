@@ -2,18 +2,20 @@ package org.tworow.towerdefense;
 
 import org.tworow.towerdefense.Character.Attacker.Attacker;
 import org.tworow.towerdefense.Character.Attacker.AttackerFactory;
+import org.tworow.towerdefense.Character.Attacker.Attackers;
 import org.tworow.towerdefense.Character.Defender.Defender;
 import org.tworow.towerdefense.Character.Defender.DefenderFactory;
 import org.tworow.towerdefense.Grid.GameplayGrid;
 import org.tworow.towerdefense.Projectile.Projectile;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Game {
 
     private GameplayGrid grid;
     private CollisionDetector collisionDetector;
-    private LinkedList<Attacker> attackers;
+    private Attackers attackers;
     private LinkedList<Defender> defenders;
     private LinkedList<Projectile> projectiles;
     private boolean isGameOver;
@@ -43,13 +45,16 @@ public class Game {
         defenders.add(DefenderFactory.createDefender(grid, 2, 3, 2));
         defenders.add(DefenderFactory.createDefender(grid, 4, 4, 2));
         // create empty array of attackers
-        attackers = new LinkedList<>();
+        attackers = new Attackers();
 
         // create empty array of projectiles
         projectiles = new LinkedList<>();
 
+        Iterator<Attacker> it = attackers.iterator();
+
         // instantiate collision detector
         collisionDetector = new CollisionDetector();
+
 
         while (true) {
 
@@ -59,6 +64,7 @@ public class Game {
                 e.printStackTrace();
             }
 
+            if (collisionDetector.checkBase(attackers))
 
             counter++;
             // While game is not over, instantiate attackers
@@ -75,7 +81,7 @@ public class Game {
             // Move projectiles
             for (Projectile pr : projectiles) {
                     if (collisionDetector.checkLimit(pr, grid)){
-                        projectiles.remove(pr);
+                        //projectiles.iterator().remove();
                         pr.getShape().delete();
                     }
                     pr.move();
@@ -84,12 +90,12 @@ public class Game {
                 for (Attacker a : attackers) {
                     if (collisionDetector.checkProjectile(pr, a)) {
                         System.out.println("Vai toma sua gostosa");
-                        a.takeDamage(pr.getDamage());
-                        pr.setDamage(0);
+                        //a.takeDamage(pr.getDamage());
+                        //pr.setDamage(0);
                         //projectiles.remove(pr);
                         pr.getShape().delete();
                         if (a.isDead()){
-                           attackers.remove(a);
+                           attackers.remove();
                            a.getShape().delete();
 
                         }
@@ -118,7 +124,7 @@ public class Game {
 
                             }
                             if (a.isDead()) {
-                                attackers.remove(a);
+                                attackers.iterator().remove();
                                 a.getShape().delete();
 
                             }
@@ -126,11 +132,8 @@ public class Game {
                     }
                 }
                 if (collisionDetector.checkBase(a)) {
-                    System.out.println("Morte por out of bounds");
-                    //attackers.remove(a);
-                    System.out.println("Removed");
+                    attackers.remove();
                     a.getShape().delete();
-                    System.out.println("Deleted");
                     gameOver();
                     System.out.println("Game over");
                 }
@@ -141,6 +144,7 @@ public class Game {
     public void gameOver() {
         isGameOver = true;
     }
+
 
    /* @Override
     public Iterator iterator() {
