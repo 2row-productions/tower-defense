@@ -12,6 +12,7 @@ public class Projectile {
     private Rectangle shape;
     private GameplayGrid grid;
 
+
     public Projectile(GameplayGrid grid, int col, int row, int damage) {
         this.grid = grid;
         this.damage = damage;
@@ -59,4 +60,9 @@ public class Projectile {
     public int getDamage() {
         return damage;
     }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
 }

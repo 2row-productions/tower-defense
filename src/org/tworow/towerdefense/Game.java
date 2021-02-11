@@ -38,9 +38,9 @@ public class Game {
 
         // defenders test (gonna be handled by mouse input)
         defenders.add(DefenderFactory.createDefender(grid, 0, 0, 2));
-        //defenders.add(DefenderFactory.createDefender(grid, 1, 2, 2));
-        //defenders.add(DefenderFactory.createDefender(grid, 3, 1, 2));
-        //defenders.add(DefenderFactory.createDefender(grid, 2, 3, 2));
+        defenders.add(DefenderFactory.createDefender(grid, 1, 2, 2));
+        defenders.add(DefenderFactory.createDefender(grid, 3, 1, 2));
+        defenders.add(DefenderFactory.createDefender(grid, 2, 3, 2));
         defenders.add(DefenderFactory.createDefender(grid, 4, 4, 2));
         // create empty array of attackers
         attackers = new LinkedList<>();
@@ -85,7 +85,8 @@ public class Game {
                     if (collisionDetector.checkProjectile(pr, a)) {
                         System.out.println("Vai toma sua gostosa");
                         a.takeDamage(pr.getDamage());
-                        projectiles.remove(pr);
+                        pr.setDamage(0);
+                        //projectiles.remove(pr);
                         pr.getShape().delete();
                         if (a.isDead()){
                            attackers.remove(a);
@@ -126,7 +127,7 @@ public class Game {
                 }
                 if (collisionDetector.checkBase(a)) {
                     System.out.println("Morte por out of bounds");
-                    attackers.remove(a);
+                    //attackers.remove(a);
                     System.out.println("Removed");
                     a.getShape().delete();
                     System.out.println("Deleted");
