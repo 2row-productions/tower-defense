@@ -11,9 +11,10 @@ public class Attacker extends Character {
     private int moves;
     private final int MOVE_LIMITER = (int) (Math.random() * 10) + 3;
     private boolean isMoving = true;
+    private boolean reachedBase;
 
-    public Attacker(GameplayGrid grid, int health, int col, int row, int damage) {
-        super(grid, health, col, row, damage);
+    public Attacker(GameplayGrid grid, int col, int row) {
+        super(grid, col, row);
 
         moves = 0;
         int attackerCol = col - getSize() + grid.getPadding();
@@ -31,13 +32,17 @@ public class Attacker extends Character {
 
         if (moves % MOVE_LIMITER == 0 && isMoving) {
             updateCol();
-            getShape().translate(-(getGrid().getCellsize() / 20), 0);
+            getShape().translate(-(getGrid().getCellsize() / 10), 0);
         }
 
         isMoving = true;
     }
-    public void stop(){
-        isMoving = false;
+
+    public boolean getReachedBase() {
+        return reachedBase;
     }
 
+    public void setReachedBase() {
+        reachedBase = true;
+    }
 }

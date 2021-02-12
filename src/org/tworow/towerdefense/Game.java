@@ -2,11 +2,9 @@ package org.tworow.towerdefense;
 
 import org.tworow.towerdefense.Character.Attacker.Attacker;
 import org.tworow.towerdefense.Character.Attacker.AttackerFactory;
-import org.tworow.towerdefense.Character.Attacker.Attackers;
 import org.tworow.towerdefense.Character.Defender.Defender;
 import org.tworow.towerdefense.Character.Defender.DefenderFactory;
 import org.tworow.towerdefense.Grid.GameplayGrid;
-import org.tworow.towerdefense.Projectile.Projectile;
 
 import java.util.LinkedList;
 
@@ -15,9 +13,9 @@ public class Game {
     private GameplayGrid grid;
     private CollisionDetector collisionDetector;
     private LinkedList<Attacker> attackers;
-    private LinkedList<Defender> defenders;
-    private LinkedList<Projectile> projectiles;
+    private Defender defender;
     private boolean isGameOver;
+    private int lifesCounter = 3;
 
     public Game(int cols, int rows) {
 
@@ -34,23 +32,15 @@ public class Game {
 
         int counter = 0;
 
-        // create empty array of defenders
-        defenders = new LinkedList<>();
-
         // defenders test (gonna be handled by mouse input)
-        defenders.add(DefenderFactory.createDefender(grid, 0, 0, 2));
-        defenders.add(DefenderFactory.createDefender(grid, 1, 2, 2));
-        defenders.add(DefenderFactory.createDefender(grid, 3, 1, 2));
-        defenders.add(DefenderFactory.createDefender(grid, 2, 3, 2));
-        defenders.add(DefenderFactory.createDefender(grid, 4, 4, 2));
+
+        defender = DefenderFactory.createDefender(grid, 4, 4);
 
         // create empty array of attackers
         attackers = new LinkedList<>();
 
-        // create empty array of projectiles
-        projectiles = new LinkedList<>();
 
-
+        // Iterator<Attacker> it = attackers.iterator();
 
         // instantiate collision detector
         collisionDetector = new CollisionDetector();
@@ -63,50 +53,14 @@ public class Game {
                 e.printStackTrace();
             }
 
+
             counter++;
             // While game is not over, instantiate attackers
+
             if (counter % 300 == 0) {
                 attackers.add(AttackerFactory.createAttacker(grid));
             }
-            // Shoot (instantiate projectiles)
-            for (int i = 0; i < defenders.size(); i++) {
 
-                if(counter % 300 == 0) {
-                projectiles.add(defenders.get(i).shoot());
-                }
-            }
-
-            // Move projectiles
-            for (int i = 0 ; i < projectiles.size(); i++) {
-                System.out.println("projectile size" + projectiles.size());
-                    projectiles.get(i).move();
-
-                // check if projectile hit an attacker
-                for (int j = 0; j < attackers.size(); j++) {
-                    System.out.println("attacker size " + attackers.size());
-                    if (collisionDetector.checkProjectile(projectiles.get(i), attackers.get(j))) {
-                        System.out.println("Vai toma sua gostosa");
-                        attackers.get(j).takeDamage(projectiles.get(i).getDamage());
-                        projectiles.get(i).getShape().delete();
-                        projectiles.remove();
-                        i--;
-
-                        if (attackers.get(j).isDead()){
-                           attackers.get(j).getShape().delete();
-                           attackers.remove();
-                           j--;
-
-                        }
-                    }
-                }
-
-                    if (collisionDetector.checkLimit(projectiles.get(i), grid)) {
-                        projectiles.get(i).getShape().delete();
-                        projectiles.remove();
-                        i--;
-                    }
-
-            }
 
 
 
@@ -120,38 +74,29 @@ public class Game {
                 attackers.get(i).move();
 
                 // check if attacker hit defender
-                for (int j = 0; j < defenders.size(); j++) {
-                    System.out.println("defender size" + defenders.size());
-                    if (collisionDetector.checkDefender(attackers.get(i), defenders.get(j))) {
-                        attackers.get(i).stop();
 
-                        if (!defenders.get(j).isDead()) {
-                            if (counter % 30 == 0) {
-                                defenders.get(j).takeDamage(attackers.get(i).getDamage());
-                            }
-                            if (defenders.get(j).isDead()) {
-                                defenders.get(j).getShape().delete();
-                                defenders.remove();
-                                j--;
-                                attackers.get(i).move();
+                if (collisionDetector.checkDefender(a, defender) && !a.getReachedBase()) {
 
-                            }
-                            if (attackers.get(i).isDead()) {
-                                attackers.get(i).getShape().delete();
-                                attackers.remove();
-                                i--;
+                    a.setReachedBase();
 
-                            }
-                        }
+                    if (defender.isDead()) {
+                        gameOver();
                     }
+
+                        //attackers.remove();
+                        a.getShape().delete();
                 }
-                if (collisionDetector.checkBase(attackers.get(i))) {
-                    attackers.get(i).getShape().delete();
-                    attackers.remove();
-                    i--;
-                    gameOver();
-                    System.out.println("Game over");
+
+                if (collisionDetector.checkBase(a) && !a.getReachedBase()) {
+                    a.setReachedBase();
+                    a.getShape().delete();
+                    lifesCounter--;
+                    System.out.println(lifesCounter);
                 }
+            }
+
+            if (lifesCounter == 0) {
+                gameOver();
             }
         }
     }
@@ -160,26 +105,4 @@ public class Game {
         isGameOver = true;
     }
 
-
-   /* @Override
-    public Iterator iterator() {
-        current = min;
-        return new Iterator() {
-
-            @Override
-            public boolean hasNext() {
-                return current <= max;
-            }
-
-            @Override
-            public Integer next() {
-                return current++;
-            }
-
-            @Override
-            public void remove(){
-
-            }
-        };
-    } */
 }
