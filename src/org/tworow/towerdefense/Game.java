@@ -8,14 +8,13 @@ import org.tworow.towerdefense.Character.Defender.DefenderFactory;
 import org.tworow.towerdefense.Grid.GameplayGrid;
 import org.tworow.towerdefense.Projectile.Projectile;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Game {
 
     private GameplayGrid grid;
     private CollisionDetector collisionDetector;
-    private Attackers attackers;
+    private LinkedList<Attacker> attackers;
     private LinkedList<Defender> defenders;
     private LinkedList<Projectile> projectiles;
     private boolean isGameOver;
@@ -44,17 +43,17 @@ public class Game {
         defenders.add(DefenderFactory.createDefender(grid, 3, 1, 2));
         defenders.add(DefenderFactory.createDefender(grid, 2, 3, 2));
         defenders.add(DefenderFactory.createDefender(grid, 4, 4, 2));
+
         // create empty array of attackers
-        attackers = new Attackers();
+        attackers = new LinkedList<>();
 
         // create empty array of projectiles
         projectiles = new LinkedList<>();
 
-        Iterator<Attacker> it = attackers.iterator();
+
 
         // instantiate collision detector
         collisionDetector = new CollisionDetector();
-
 
         while (true) {
 
@@ -64,76 +63,92 @@ public class Game {
                 e.printStackTrace();
             }
 
-            if (collisionDetector.checkBase(attackers))
-
             counter++;
             // While game is not over, instantiate attackers
             if (counter % 300 == 0) {
                 attackers.add(AttackerFactory.createAttacker(grid));
             }
             // Shoot (instantiate projectiles)
-            for (Defender d : defenders) {
+            for (int i = 0; i < defenders.size(); i++) {
+
                 if(counter % 300 == 0) {
-                projectiles.add(d.shoot());
+                projectiles.add(defenders.get(i).shoot());
                 }
             }
 
             // Move projectiles
-            for (Projectile pr : projectiles) {
-                    if (collisionDetector.checkLimit(pr, grid)){
-                        //projectiles.iterator().remove();
-                        pr.getShape().delete();
-                    }
-                    pr.move();
+            for (int i = 0 ; i < projectiles.size(); i++) {
+                System.out.println("projectile size" + projectiles.size());
+                    projectiles.get(i).move();
 
                 // check if projectile hit an attacker
-                for (Attacker a : attackers) {
-                    if (collisionDetector.checkProjectile(pr, a)) {
+                for (int j = 0; j < attackers.size(); j++) {
+                    System.out.println("attacker size " + attackers.size());
+                    if (collisionDetector.checkProjectile(projectiles.get(i), attackers.get(j))) {
                         System.out.println("Vai toma sua gostosa");
-                        //a.takeDamage(pr.getDamage());
-                        //pr.setDamage(0);
-                        //projectiles.remove(pr);
-                        pr.getShape().delete();
-                        if (a.isDead()){
+                        attackers.get(j).takeDamage(projectiles.get(i).getDamage());
+                        projectiles.get(i).getShape().delete();
+                        projectiles.remove();
+                        i--;
+
+                        if (attackers.get(j).isDead()){
+                           attackers.get(j).getShape().delete();
                            attackers.remove();
-                           a.getShape().delete();
+                           j--;
 
                         }
                     }
                 }
+
+                    if (collisionDetector.checkLimit(projectiles.get(i), grid)) {
+                        projectiles.get(i).getShape().delete();
+                        projectiles.remove();
+                        i--;
+                    }
+
             }
 
-            for (Attacker a : attackers) {
-                // move attackers
-                a.move();
+
+
+
+
+
+
+            //Move attackers
+            for (int i = 0; i < attackers.size(); i++) {
+                System.out.println("attacker size" + attackers.size());
+                attackers.get(i).move();
 
                 // check if attacker hit defender
-                for (Defender d : defenders) {
-                    if (collisionDetector.checkDefender(a, d)) {
-                        a.stop();
+                for (int j = 0; j < defenders.size(); j++) {
+                    System.out.println("defender size" + defenders.size());
+                    if (collisionDetector.checkDefender(attackers.get(i), defenders.get(j))) {
+                        attackers.get(i).stop();
 
-                        if (!d.isDead()) {
+                        if (!defenders.get(j).isDead()) {
                             if (counter % 30 == 0) {
-                                d.takeDamage(a.getDamage());
+                                defenders.get(j).takeDamage(attackers.get(i).getDamage());
+                            }
+                            if (defenders.get(j).isDead()) {
+                                defenders.get(j).getShape().delete();
+                                defenders.remove();
+                                j--;
+                                attackers.get(i).move();
 
                             }
-                            if (d.isDead()) {
-                                defenders.remove(d);
-                                d.getShape().delete();
-                                a.move();
-
-                            }
-                            if (a.isDead()) {
-                                attackers.iterator().remove();
-                                a.getShape().delete();
+                            if (attackers.get(i).isDead()) {
+                                attackers.get(i).getShape().delete();
+                                attackers.remove();
+                                i--;
 
                             }
                         }
                     }
                 }
-                if (collisionDetector.checkBase(a)) {
+                if (collisionDetector.checkBase(attackers.get(i))) {
+                    attackers.get(i).getShape().delete();
                     attackers.remove();
-                    a.getShape().delete();
+                    i--;
                     gameOver();
                     System.out.println("Game over");
                 }
