@@ -1,7 +1,6 @@
 package org.tworow.towerdefense.Character.Attacker;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.tworow.towerdefense.Character.Character;
 import org.tworow.towerdefense.Grid.GameplayGrid;
 
@@ -10,7 +9,6 @@ public class Attacker extends Character {
 
     private int moves;
     private final int MOVE_LIMITER = (int) (Math.random() * 10) + 3;
-    private boolean isMoving = true;
     private boolean reachedBase;
 
     public Attacker(GameplayGrid grid, int col, int row) {
@@ -20,22 +18,27 @@ public class Attacker extends Character {
         int attackerCol = col - getSize() + grid.getPadding();
         int attackerRow = row + grid.getPadding();
 
-        Rectangle shape = new Rectangle(attackerCol, attackerRow, getSize(), getSize());
-        shape.setColor(Color.YELLOW);
-        shape.fill();
+        Picture shape = new Picture(attackerCol, attackerRow, "resources/food/chocolate1.png");
+        shape.draw();
         setShape(shape);
     }
 
+    @Override
+    public void updateColToLeft() {
+        setCol(getCol() - getGrid().getCellsize()/10);
+    }
+
+    @Override
     public void move() {
 
         moves++;
 
-        if (moves % MOVE_LIMITER == 0 && isMoving) {
-            updateCol();
+        if (moves % MOVE_LIMITER == 0 && isMoving()) {
+            updateColToLeft();
             getShape().translate(-(getGrid().getCellsize() / 10), 0);
         }
 
-        isMoving = true;
+        setMoving(true);
     }
 
     public boolean getReachedBase() {

@@ -11,7 +11,7 @@ public class CollisionDetector {
 
     public boolean checkDefender(Attacker attacker, Defender defender) {
 
-        return attacker.getCol() == defender.getCol() + defender.getSize()
+        return attacker.getCol() == defender.getCol() + defender.getSize() + 30
                 && attacker.getRow() == defender.getRow();
     }
 

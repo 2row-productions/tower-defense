@@ -4,7 +4,6 @@ import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Cell extends Rectangle {
-    private boolean isOccuppied;
     Rectangle rectangle;
 
     public Cell(int padding, int padding2, int col, int row, Color color) {
@@ -13,11 +12,4 @@ public class Cell extends Rectangle {
         rectangle.draw();
     }
 
-    public boolean isOccuppied() {
-        return isOccuppied;
-    }
-
-    public void setIsOccupied(boolean isOccuppied) {
-        this.isOccuppied = isOccuppied;
-    }
 }

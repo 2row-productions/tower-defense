@@ -2,11 +2,8 @@ package org.tworow.towerdefense.Grid;
 
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import org.tworow.towerdefense.Character.Attacker.Attacker;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.tworow.towerdefense.Character.Attacker.AttackerFactory;
-import org.tworow.towerdefense.Character.Defender.Defender;
-import org.tworow.towerdefense.Character.Defender.DefenderFactory;
-import org.tworow.towerdefense.CollisionDetector;
 
 public class GameplayGrid {
 
@@ -15,22 +12,25 @@ public class GameplayGrid {
     private int rows;
     private int CELL_SIZE = 50;
     private Rectangle grid;
-    private int numberOfAttackers = 5;
-    private Attacker[] attackers;
-
+    private Picture background;
 
     public GameplayGrid(int cols, int rows){
         this.cols = cols;
         this.rows = rows;
 
         grid = new Rectangle(PADDING, PADDING, getWidth(), getHeight());
-        grid.setColor(Color.RED);
-
+    }
+    public void deleteGrid (){
+        grid.delete();
     }
 
+
     public void init(){
-        grid.fill();
+        grid.draw();
         generateCells();
+
+        background = new Picture(PADDING, PADDING, "resources/background.png");
+        background.draw();
     }
 
 

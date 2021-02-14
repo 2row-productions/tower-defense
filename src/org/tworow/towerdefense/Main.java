@@ -4,14 +4,19 @@ public class Main {
 
     public static void main(String[] args){
 
-       Game towerDefense = new Game(10,5);
+       Game towerDefense = new Game(16,7);
        towerDefense.init();
-       towerDefense.start();
 
     }
 }
 
-// TODO LIST:
-// Finish game when enemy reaches base (stop enemies aswell?)
-// Projectile
-// Get rid of most magic numbers
+/*
+Todo list:
+- Increases dificulty after a certain number of food
+- Game menu with space (or every key) keyhandler event
+- Game over
+- Possibility of restart game after game over
+- Sound
+- Different food sprites
+- Switch to teleport sprite and moving cells (if its not too complicated)
+ */
