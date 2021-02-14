@@ -8,8 +8,6 @@ public class Cell extends Rectangle {
 
     public Cell(int padding, int padding2, int col, int row, Color color) {
         rectangle = new Rectangle(padding, padding2, col, row);
-        rectangle.setColor(color);
-        rectangle.draw();
     }
 
 }

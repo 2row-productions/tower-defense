@@ -1,6 +1,5 @@
 package org.tworow.towerdefense.Character.Attacker;
 
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.tworow.towerdefense.Character.Character;
 import org.tworow.towerdefense.Grid.GameplayGrid;
 
@@ -10,17 +9,12 @@ public class Attacker extends Character {
     private int moves;
     private final int MOVE_LIMITER = (int) (Math.random() * 10) + 3;
     private boolean reachedBase;
+    private boolean alreadyHit;
 
     public Attacker(GameplayGrid grid, int col, int row) {
         super(grid, col, row);
 
         moves = 0;
-        int attackerCol = col - getSize() + grid.getPadding();
-        int attackerRow = row + grid.getPadding();
-
-        Picture shape = new Picture(attackerCol, attackerRow, "resources/food/chocolate1.png");
-        shape.draw();
-        setShape(shape);
     }
 
     @Override
@@ -48,4 +42,13 @@ public class Attacker extends Character {
     public void setReachedBase() {
         reachedBase = true;
     }
+
+    public void setAlreadyHit(boolean alreadyHit) {
+        this.alreadyHit = alreadyHit;
+    }
+
+    public boolean isAlreadyHit() {
+        return alreadyHit;
+    }
+
 }

@@ -9,15 +9,18 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.tworow.towerdefense.Character.Attacker.Attacker;
 import org.tworow.towerdefense.Character.Attacker.AttackerFactory;
+import org.tworow.towerdefense.Character.Attacker.Enemy;
+import org.tworow.towerdefense.Character.Attacker.Food;
 import org.tworow.towerdefense.Character.Defender.Defender;
 import org.tworow.towerdefense.Character.Defender.DefenderFactory;
 import org.tworow.towerdefense.Grid.GameplayGrid;
+import org.tworow.towerdefense.InputHandler.MenuKeyboardHandler;
+import org.tworow.towerdefense.InputHandler.PlayerKeyboardHandler;
 
 import java.util.LinkedList;
 
 public class Game {
 
-    static final int CELL_FRACTIONS = 10;
     private GameplayGrid grid;
     private CollisionDetector collisionDetector;
     private LinkedList<Attacker> attackers;
@@ -27,27 +30,26 @@ public class Game {
     private Keyboard keyboard;
     private KeyboardEvent keyboardEvent;
     private KeyboardEventType keyboardEventType;
-    private Text scoreText;
     private boolean isGameOver;
+    private boolean shouldIncreaseDiff = true;
     private int score = 0;
-    private int levelOfDifficulty = 800;
-    private Text lifesCounterText;
     private int lifesCounter = 3;
+    private int levelOfDifficulty = 400;
+    private Text scoreText;
     private GAME_STATE state = GAME_STATE.MENU;
     private Picture menuBackground;
     private Sound backgroundSound;
     private Sound lifeLossSound;
     private Sound gameOverSound;
     private Sound eatingSound;
+    private Sound enemyHitSound;
+    private Sound difficultyIncreaseSound;
+    private Picture[] lifesImgArray;
 
     public Game(int cols, int rows) {
 
         this.grid = new GameplayGrid(cols, rows);
     }
-
-    //public void setSound(String path){
-      //  this.backgroundSound = new Sound(path);
-    //}
 
     public void setState(GAME_STATE state) {
         this.state = state;
@@ -81,7 +83,6 @@ public class Game {
                 menuBackground = new Picture(grid.getPadding(), grid.getPadding(), "resources/menu/startMenu/start-menu-without-instructions.png");
                 menuBackground.draw();
 
-
                 if (counter > 2) {
                     counter = 0;
                     menuBackground = new Picture(grid.getPadding(), grid.getPadding(), "resources/menu/startMenu/start-menu-w-instruction.png");
@@ -107,11 +108,15 @@ public class Game {
                 menuBackground = new Picture(grid.getPadding(), grid.getPadding(), "resources/menu/gameOverMenu/game-over-1.png");
                 menuBackground.draw();
 
+                scoreText = new Text(grid.getWidth() - 105, grid.getHeight()+130   , "Score: " + score);
+                scoreText.grow(40, 40);
+                scoreText.setColor(Color.WHITE);
 
                 if (counter > 2) {
                     counter = 0;
                     menuBackground = new Picture(grid.getPadding(), grid.getPadding(), "resources/menu/gameOverMenu/game-over-2.png");
                     menuBackground.draw();
+                    scoreText.draw();
                 }
 
 
@@ -143,12 +148,17 @@ public class Game {
 
     public void start() {
 
-        lifesCounterText = new Text(grid.getPadding()+110, grid.getHeight()+61, "" + lifesCounter);
-        lifesCounterText.setColor(Color.WHITE);
-        lifesCounterText.grow(7, 15);
-        lifesCounterText.draw();
+        lifesImgArray = new Picture[]{
+                new Picture(grid.getPadding()+120, grid.getHeight()+90, "resources/lives/life-sprite.png"),
+                new Picture(grid.getPadding()+150, grid.getHeight()+90, "resources/lives/life-sprite.png"),
+                new Picture(grid.getPadding()+180, grid.getHeight()+90, "resources/lives/life-sprite.png"),
+        };
 
-        scoreText = new Text(grid.getPadding()+120, grid.getHeight()+100, "" + score);
+        for (Picture img : lifesImgArray) {
+            img.draw();
+        }
+
+        scoreText = new Text(grid.getPadding()+128, grid.getHeight()+150, "" + score);
         scoreText.setColor(Color.WHITE);
         scoreText.grow(7, 15);
         scoreText.draw();
@@ -195,18 +205,47 @@ public class Game {
 
                 // check if attacker hit defender
                 if (collisionDetector.checkDefender(attacker, defender) && !attacker.getReachedBase()) {
-                    eatingSound = new Sound("/resources/sounds/eating-sound.wav");
-                    eatingSound.play(true);
-                    defender.setEating(true);
-                    defender.getShape().delete();
-                    defender.setShape(new Picture(defender.getCol(), defender.getRow(), "resources/buu/buu-eating.png"));
-                    defender.getShape().draw();
 
-                    attacker.setReachedBase();
+                    if (attacker instanceof Enemy && !attacker.isAlreadyHit()){
+                        enemyHitSound = new Sound("/resources/sounds/caralho.wav");
+                        enemyHitSound.play(true);
 
-                    attacker.getShape().delete();
-                    score += 100;
-                    scoreText.setText("" + score);
+                        defender.setHit(true);
+                        lifesCounter--;
+                        if (lifesCounter == 2) {
+                            lifesImgArray[2].delete();
+                        } else if (lifesCounter == 1) {
+                            lifesImgArray[1].delete();
+                        }
+
+                        defender.setEating(false);
+
+                        // switches buu sprite
+                        defender.getShape().delete();
+                        defender.setShape(new Picture(defender.getCol(), defender.getRow(), "resources/buu/buu-hit.png"));
+                        defender.getShape().draw();
+
+                        attacker.setAlreadyHit(true);
+                        attacker.getShape().delete();
+
+                    } else if (attacker instanceof Food) {
+                        shouldIncreaseDiff = true;
+
+                        eatingSound = new Sound("/resources/sounds/eating-sound.wav");
+                        eatingSound.play(true);
+                        defender.setEating(true);
+
+                        // switches buu sprite
+                        defender.getShape().delete();
+                        defender.setShape(new Picture(defender.getCol(), defender.getRow(), "resources/buu/buu-eating.png"));
+                        defender.getShape().draw();
+
+                        attacker.setReachedBase();
+                        attacker.getShape().delete();
+                        score += 100;
+                        scoreText.setText("" + score);
+                    }
+
                 }
 
                 if (collisionDetector.checkBase(attacker) && !attacker.getReachedBase()) {
@@ -214,25 +253,57 @@ public class Game {
                     attacker.setReachedBase();
                     attacker.getShape().delete();
                     lifesCounter--;
-                    lifesCounterText.setText("" + lifesCounter);
+
+                    if (lifesCounter == 2) {
+
+                        lifesImgArray[2].delete();
+                    } else if (lifesCounter == 1) {
+
+                        lifesImgArray[1].delete();
+                    }
+
                     lifeLossSound = new Sound("/resources/sounds/fodasse.wav");
                     lifeLossSound.play(true);
                 }
+            }
+            if (defender.isHit() && counter % 65 == 0) {
+
+                defender.setHit(false);
+
+                defender.getShape().delete();
+                defender.setShape(new Picture(defender.getCol(), defender.getRow(), "resources/buu/buu.png"));
+                defender.getShape().draw();
             }
 
             if (defender.isEating() && counter % 65 == 0) {
 
                 defender.setEating(false);
+
                 defender.getShape().delete();
                 defender.setShape(new Picture(defender.getCol(), defender.getRow(), "resources/buu/buu.png"));
                 defender.getShape().draw();
 
             }
 
+            if (defender.isTeleporting() && counter % 40 == 0) {
 
-            //if (score % 100 == 0 && score != 0) {
-            //    System.out.println("Difficult updated");
-            //}
+                defender.setTeleporting(false);
+
+                defender.getShape().delete();
+                defender.setShape(new Picture(defender.getCol(), defender.getRow(), "resources/buu/buu.png"));
+                defender.getShape().draw();
+            }
+
+            if (score % 500 == 0 && score != 0 && shouldIncreaseDiff) {
+                difficultyIncreaseSound = new Sound("/resources/sounds/a-true-miracle.wav");
+                difficultyIncreaseSound.play(true);
+
+                if (levelOfDifficulty > 100) {
+                    levelOfDifficulty -= 50;
+                }
+                shouldIncreaseDiff = false;
+            }
+
 
             if (lifesCounter == 0) {
                 gameOver();
@@ -244,7 +315,6 @@ public class Game {
         isGameOver = true;
         setState(GAME_STATE.GAMEOVER);
         backgroundSound.stop();
-        lifeLossSound.stop();
         gameOverSound = new Sound("/resources/sounds/olha-bem.wav");
         gameOverSound.play(true);
     }

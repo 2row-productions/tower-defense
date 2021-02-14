@@ -7,6 +7,8 @@ import org.tworow.towerdefense.Grid.GameplayGrid;
 public class Defender extends Character {
 
     private boolean isEating;
+    private boolean isHit;
+    private boolean isTeleporting;
 
     public Defender(GameplayGrid grid, int col, int row) {
         super(grid, col, row);
@@ -25,6 +27,22 @@ public class Defender extends Character {
 
     public boolean isEating() {
         return isEating;
+    }
+
+    public boolean isTeleporting() {
+        return isTeleporting;
+    }
+
+    public void setTeleporting(boolean teleporting) {
+        isTeleporting = teleporting;
+    }
+
+    public void setHit(boolean hit) {
+        isHit = hit;
+    }
+
+    public boolean isHit() {
+        return isHit;
     }
 
     @Override

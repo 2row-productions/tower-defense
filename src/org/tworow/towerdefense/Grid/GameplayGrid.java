@@ -26,7 +26,6 @@ public class GameplayGrid {
 
 
     public void init(){
-        grid.draw();
         generateCells();
 
         background = new Picture(PADDING, PADDING, "resources/background.png");
