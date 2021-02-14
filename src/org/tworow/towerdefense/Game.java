@@ -7,23 +7,24 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.tworow.towerdefense.Character.Attacker.Attacker;
-import org.tworow.towerdefense.Character.Attacker.AttackerFactory;
-import org.tworow.towerdefense.Character.Attacker.Enemy;
-import org.tworow.towerdefense.Character.Attacker.Food;
+import org.tworow.towerdefense.Character.Projectiles.Projectile;
+import org.tworow.towerdefense.Character.Projectiles.ProjectileFactory;
+import org.tworow.towerdefense.Character.Projectiles.Enemy;
+import org.tworow.towerdefense.Character.Projectiles.Food;
 import org.tworow.towerdefense.Character.Defender.Defender;
 import org.tworow.towerdefense.Character.Defender.DefenderFactory;
 import org.tworow.towerdefense.Grid.GameplayGrid;
 import org.tworow.towerdefense.InputHandler.MenuKeyboardHandler;
 import org.tworow.towerdefense.InputHandler.PlayerKeyboardHandler;
 
+import java.awt.*;
 import java.util.LinkedList;
 
 public class Game {
 
     private GameplayGrid grid;
     private CollisionDetector collisionDetector;
-    private LinkedList<Attacker> attackers;
+    private LinkedList<Projectile> projectiles;
     private Defender defender;
     private MenuKeyboardHandler menuKeyboardHandler;
     private PlayerKeyboardHandler playerKeyboardHandler;
@@ -32,7 +33,7 @@ public class Game {
     private KeyboardEventType keyboardEventType;
     private boolean isGameOver;
     private boolean shouldIncreaseDiff = true;
-    private int score = 0;
+    private int score;
     private int lifesCounter = 3;
     private int levelOfDifficulty = 400;
     private Text scoreText;
@@ -41,6 +42,7 @@ public class Game {
     private Sound backgroundSound;
     private Sound lifeLossSound;
     private Sound gameOverSound;
+    private Sound teleportSound;
     private Sound eatingSound;
     private Sound enemyHitSound;
     private Sound difficultyIncreaseSound;
@@ -61,6 +63,7 @@ public class Game {
 
     public void init() {
 
+        // instantiate input handlers
         menuKeyboardHandler = new MenuKeyboardHandler(this);
         keyboard = new Keyboard(menuKeyboardHandler);
         keyboardEvent = new KeyboardEvent();
@@ -79,11 +82,13 @@ public class Game {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
                 counter++;
                 menuBackground = new Picture(grid.getPadding(), grid.getPadding(), "resources/menu/startMenu/start-menu-without-instructions.png");
                 menuBackground.draw();
 
                 if (counter > 2) {
+
                     counter = 0;
                     menuBackground = new Picture(grid.getPadding(), grid.getPadding(), "resources/menu/startMenu/start-menu-w-instruction.png");
                     menuBackground.draw();
@@ -91,13 +96,14 @@ public class Game {
             }
 
             if (state == GAME_STATE.GAME) {
+
                 menuBackground.delete();
                 grid.init();
                 start();
             }
 
             if (state == GAME_STATE.GAMEOVER){
-                grid.deleteGrid();
+
                 try {
                     Thread.sleep(300);
                 } catch (InterruptedException e) {
@@ -114,36 +120,12 @@ public class Game {
 
                 if (counter > 2) {
                     counter = 0;
-                    menuBackground = new Picture(grid.getPadding(), grid.getPadding(), "resources/menu/gameOverMenu/game-over-2.png");
-                    menuBackground.draw();
                     scoreText.draw();
                 }
 
-
             }
 
-            if(state == GAME_STATE.MARYGAMEOVER){
-                menuBackground.delete();
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                counter++;
-                menuBackground = new Picture(grid.getPadding(), grid.getPadding(), "resources/menu/gameOverMenu/mary-over-1.png");
-                menuBackground.draw();
-
-
-                if (counter > 2) {
-                    counter = 0;
-                    menuBackground = new Picture(grid.getPadding(), grid.getPadding(), "resources/menu/gameOverMenu/mary-over-2.png");
-                    menuBackground.draw();
-                }
-
-            }
         }
-
     }
 
     public void start() {
@@ -158,15 +140,17 @@ public class Game {
             img.draw();
         }
 
+        score = 0;
+
         scoreText = new Text(grid.getPadding()+128, grid.getHeight()+150, "" + score);
-        scoreText.setColor(Color.WHITE);
+        scoreText.setColor(Color.ORANGE);
         scoreText.grow(7, 15);
         scoreText.draw();
 
         int counter = 0;
 
         // instantiate defender
-        defender = DefenderFactory.createDefender(grid, 1, 0);
+        defender = DefenderFactory.createDefender(grid, 1, 3);
 
         // instantiate defender keyboardHandler and listeners
         playerKeyboardHandler = new PlayerKeyboardHandler(this, defender);
@@ -176,7 +160,7 @@ public class Game {
         keyboard.addEventListener(KeyboardEvent.KEY_UP, KeyboardEventType.KEY_PRESSED);
 
         // create empty array of attackers
-        attackers = new LinkedList<>();
+        projectiles = new LinkedList<>();
 
         // instantiate collision detector
         collisionDetector = new CollisionDetector();
@@ -191,22 +175,52 @@ public class Game {
 
             counter++;
 
-            // While game is not over, instantiate attackers
-            if (counter % levelOfDifficulty == 0) {
-                attackers.add(AttackerFactory.createAttacker(grid));
+            if (counter == 150) {
+
+                teleportSound = new Sound("/resources/sounds/instant.wav");
+                teleportSound.play(true);
+
+                Picture shape = new Picture(defender.getCol(), defender.getRow(), "resources/buu/teleport.png");
+                shape.draw();
+                defender.setShape(shape);
             }
 
+
+            if (counter == 170) {
+
+                defender.getShape().delete();
+                Picture shape = new Picture(defender.getCol(), defender.getRow(), "resources/buu/buu.png");
+                defender.setShape(shape);
+                shape.draw();
+            }
+
+            // While game is not over, instantiate attackers
+            if (counter % levelOfDifficulty == 0) {
+                projectiles.add(ProjectileFactory.createAttacker(grid));
+            }
+
+            for (Projectile projectile : projectiles)
+
+            if (counter % 40 == 0 && projectile instanceof Enemy && !projectile.isFlying()) {
+                projectile.getShape().delete();
+                projectile.setShape(new Picture(projectile.getCol()-30, projectile.getRow()+grid.getPadding(), "resources/enemy/enemy-flying.png"));
+                projectile.getShape().draw();
+
+                projectile.setFlying(true);
+            }
+
+
             //Move attackers
-            for (int i = 0; i < attackers.size(); i++) {
+            for (int i = 0; i < projectiles.size(); i++) {
 
-                Attacker attacker = attackers.get(i);
+                Projectile projectile = projectiles.get(i);
 
-                attacker.move();
+                projectile.move();
 
                 // check if attacker hit defender
-                if (collisionDetector.checkDefender(attacker, defender) && !attacker.getReachedBase()) {
+                if (collisionDetector.checkDefender(projectile, defender) && !projectile.getReachedBase()) {
 
-                    if (attacker instanceof Enemy && !attacker.isAlreadyHit()){
+                    if (projectile instanceof Enemy && !projectile.isAlreadyHit()){
                         enemyHitSound = new Sound("/resources/sounds/caralho.wav");
                         enemyHitSound.play(true);
 
@@ -220,15 +234,20 @@ public class Game {
 
                         defender.setEating(false);
 
+                        // switches enemy sprite
+                        projectile.getShape().delete();
+                        projectile.setShape(new Picture(projectile.getCol() - grid.getPadding() - 20, projectile.getRow() + grid.getPadding(), "resources/enemy/enemy-punching.png"));
+                        projectile.getShape().draw();
+
                         // switches buu sprite
                         defender.getShape().delete();
                         defender.setShape(new Picture(defender.getCol(), defender.getRow(), "resources/buu/buu-hit.png"));
                         defender.getShape().draw();
 
-                        attacker.setAlreadyHit(true);
-                        attacker.getShape().delete();
+                        projectile.setAlreadyHit(true);
+                        //projectile.getShape().delete();
 
-                    } else if (attacker instanceof Food) {
+                    } else if (projectile instanceof Food) {
                         shouldIncreaseDiff = true;
 
                         eatingSound = new Sound("/resources/sounds/eating-sound.wav");
@@ -240,18 +259,18 @@ public class Game {
                         defender.setShape(new Picture(defender.getCol(), defender.getRow(), "resources/buu/buu-eating.png"));
                         defender.getShape().draw();
 
-                        attacker.setReachedBase();
-                        attacker.getShape().delete();
+                        projectile.setReachedBase();
+                        projectile.getShape().delete();
                         score += 100;
                         scoreText.setText("" + score);
                     }
 
                 }
 
-                if (collisionDetector.checkBase(attacker) && !attacker.getReachedBase()) {
+                if (collisionDetector.checkBase(projectile) && !projectile.getReachedBase()) {
 
-                    attacker.setReachedBase();
-                    attacker.getShape().delete();
+                    projectile.setReachedBase();
+                    projectile.getShape().delete();
                     lifesCounter--;
 
                     if (lifesCounter == 2) {
@@ -301,6 +320,7 @@ public class Game {
                 if (levelOfDifficulty > 100) {
                     levelOfDifficulty -= 50;
                 }
+
                 shouldIncreaseDiff = false;
             }
 
@@ -317,6 +337,7 @@ public class Game {
         backgroundSound.stop();
         gameOverSound = new Sound("/resources/sounds/olha-bem.wav");
         gameOverSound.play(true);
+        grid.deleteGrid();
     }
 
 }

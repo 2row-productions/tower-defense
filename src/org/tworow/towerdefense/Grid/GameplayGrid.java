@@ -3,7 +3,7 @@ package org.tworow.towerdefense.Grid;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
-import org.tworow.towerdefense.Character.Attacker.AttackerFactory;
+import org.tworow.towerdefense.Character.Projectiles.ProjectileFactory;
 
 public class GameplayGrid {
 
@@ -48,7 +48,7 @@ public class GameplayGrid {
     }
 
     public void createAttacker() {
-        AttackerFactory.createAttacker(this);
+        ProjectileFactory.createAttacker(this);
     }
 
     public int getCols() {

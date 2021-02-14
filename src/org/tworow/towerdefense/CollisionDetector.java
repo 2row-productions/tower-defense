@@ -1,19 +1,19 @@
 package org.tworow.towerdefense;
 
-import org.tworow.towerdefense.Character.Attacker.Attacker;
-import org.tworow.towerdefense.Character.Attacker.Enemy;
+import org.tworow.towerdefense.Character.Projectiles.Projectile;
+import org.tworow.towerdefense.Character.Projectiles.Enemy;
 import org.tworow.towerdefense.Character.Defender.Defender;
 
 public class CollisionDetector {
 
-    public boolean checkBase(Attacker attacker) {
-        return attacker.getCol() <= attacker.getSize() && !(attacker instanceof Enemy);
+    public boolean checkBase(Projectile projectile) {
+        return projectile.getCol() <= projectile.getSize() && !(projectile instanceof Enemy);
     }
 
-    public boolean checkDefender(Attacker attacker, Defender defender) {
+    public boolean checkDefender(Projectile projectile, Defender defender) {
 
-        return attacker.getCol() == defender.getCol() + defender.getSize() + 30
-                && attacker.getRow() == defender.getRow();
+        return projectile.getCol() == defender.getCol() + defender.getSize() + 30
+                && projectile.getRow() == defender.getRow();
     }
 
 }

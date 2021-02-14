@@ -23,13 +23,9 @@ public class MenuKeyboardHandler implements KeyboardHandler {
                     game.setState(GAME_STATE.GAME);
                 }
 
-                if (game.getState() == GAME_STATE.GAMEOVER) {
-                    game.setState(GAME_STATE.MARYGAMEOVER);
-                }
-
-                if (game.getState() == GAME_STATE.MARYGAMEOVER) {
+                /*if (game.getState() == GAME_STATE.GAMEOVER) {
                     game.setState(GAME_STATE.GAME);
-                }
+                }*/
 
                 break;
         }
