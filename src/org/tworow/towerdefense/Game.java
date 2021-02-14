@@ -1,5 +1,6 @@
 package org.tworow.towerdefense;
 
+import org.academiadecodigo.bootcamp.Sound;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
@@ -34,15 +35,24 @@ public class Game {
     private int lifesCounter = 3;
     private GAME_STATE state = GAME_STATE.MENU;
     private Picture menuBackground;
+    private Sound backgroundSound;
+    private Sound lifeLossSound;
+    private Sound gameOverSound;
+    private Sound eatingSound;
 
     public Game(int cols, int rows) {
 
         this.grid = new GameplayGrid(cols, rows);
     }
 
+    //public void setSound(String path){
+      //  this.backgroundSound = new Sound(path);
+    //}
+
     public void setState(GAME_STATE state) {
         this.state = state;
     }
+
     public GAME_STATE getState(){
         return state;
     }
@@ -55,6 +65,8 @@ public class Game {
         keyboard.addEventListener(KeyboardEvent.KEY_SPACE, KeyboardEventType.KEY_PRESSED);
 
         int counter = 0;
+        backgroundSound = new Sound("/resources/sounds/dbz-opening.wav");
+        backgroundSound.play(true);
 
         while (true) {
 
@@ -65,7 +77,6 @@ public class Game {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
                 counter++;
                 menuBackground = new Picture(grid.getPadding(), grid.getPadding(), "resources/menu/startMenu/start-menu-without-instructions.png");
                 menuBackground.draw();
@@ -184,7 +195,8 @@ public class Game {
 
                 // check if attacker hit defender
                 if (collisionDetector.checkDefender(attacker, defender) && !attacker.getReachedBase()) {
-
+                    eatingSound = new Sound("/resources/sounds/eating-sound.wav");
+                    eatingSound.play(true);
                     defender.setEating(true);
                     defender.getShape().delete();
                     defender.setShape(new Picture(defender.getCol(), defender.getRow(), "resources/buu/buu-eating.png"));
@@ -203,6 +215,8 @@ public class Game {
                     attacker.getShape().delete();
                     lifesCounter--;
                     lifesCounterText.setText("" + lifesCounter);
+                    lifeLossSound = new Sound("/resources/sounds/fodasse.wav");
+                    lifeLossSound.play(true);
                 }
             }
 
@@ -229,6 +243,10 @@ public class Game {
     public void gameOver() {
         isGameOver = true;
         setState(GAME_STATE.GAMEOVER);
+        backgroundSound.stop();
+        lifeLossSound.stop();
+        gameOverSound = new Sound("/resources/sounds/olha-bem.wav");
+        gameOverSound.play(true);
     }
 
 }

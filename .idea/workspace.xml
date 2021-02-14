@@ -21,15 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c284add5-44fd-4a13-a1d4-6bb11557a83b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Attacker/Attacker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Attacker/Attacker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Character.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Defender/Defender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Character/Defender/Defender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/CollisionDetector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/CollisionDetector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/DefenderKeyboardHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/PlayerKeyboardHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Grid/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Grid/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Grid/GameplayGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Grid/GameplayGrid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/tworow/towerdefense/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/tworow/towerdefense/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/towerdefense.iml" beforeDir="false" afterPath="$PROJECT_DIR$/towerdefense.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,15 +65,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/sounds" />
+      <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/resources/menu/gameOverMenu" />
       <recent name="$PROJECT_DIR$/resources/menu/startMenu" />
       <recent name="$PROJECT_DIR$/resources/menu" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources" />
-      <recent name="$PROJECT_DIR$/resources/food" />
     </key>
   </component>
   <component name="RunManager">
@@ -96,15 +90,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -128,6 +120,7 @@
       <workItem from="1613131002582" duration="1158000" />
       <workItem from="1613143185259" duration="6310000" />
       <workItem from="1613237603777" duration="35346000" />
+      <workItem from="1613304853240" duration="3551000" />
     </task>
     <servers />
   </component>
@@ -147,6 +140,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="229" y="360" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1613307103243">
+      <screen x="0" y="23" width="1848" height="1057" />
+    </state>
+    <state x="229" y="360" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1848.1057@0.23.1848.1057" timestamp="1613307103243" />
     <state x="773" y="223" key="#com.intellij.ide.util.MemberChooser" timestamp="1613276236658">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -156,25 +153,29 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="440" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1613272760559" />
-    <state width="1878" height="181" key="GridCell.Tab.0.bottom" timestamp="1613278173074">
+    <state width="1878" height="140" key="GridCell.Tab.0.bottom" timestamp="1613308591807">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="181" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1613278173074" />
+    <state width="1878" height="140" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1613308591807" />
+    <state width="941" height="140" key="GridCell.Tab.0.bottom/0.23.1848.1057@0.23.1848.1057" timestamp="1613308429456" />
     <state width="1878" height="133" key="GridCell.Tab.0.bottom/0.23.1920.977@0.23.1920.977" timestamp="1613248703975" />
-    <state width="1878" height="181" key="GridCell.Tab.0.center" timestamp="1613278173073">
+    <state width="1878" height="140" key="GridCell.Tab.0.center" timestamp="1613308591806">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="181" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1613278173073" />
+    <state width="1878" height="140" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1613308591806" />
+    <state width="941" height="140" key="GridCell.Tab.0.center/0.23.1848.1057@0.23.1848.1057" timestamp="1613308429455" />
     <state width="1878" height="133" key="GridCell.Tab.0.center/0.23.1920.977@0.23.1920.977" timestamp="1613248703975" />
-    <state width="1878" height="181" key="GridCell.Tab.0.left" timestamp="1613278173072">
+    <state width="1878" height="140" key="GridCell.Tab.0.left" timestamp="1613308591804">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="181" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1613278173072" />
+    <state width="1878" height="140" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1613308591804" />
+    <state width="941" height="140" key="GridCell.Tab.0.left/0.23.1848.1057@0.23.1848.1057" timestamp="1613308429454" />
     <state width="1878" height="133" key="GridCell.Tab.0.left/0.23.1920.977@0.23.1920.977" timestamp="1613248703974" />
-    <state width="1878" height="181" key="GridCell.Tab.0.right" timestamp="1613278173073">
+    <state width="1878" height="140" key="GridCell.Tab.0.right" timestamp="1613308591806">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1878" height="181" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1613278173073" />
+    <state width="1878" height="140" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1613308591806" />
+    <state width="941" height="140" key="GridCell.Tab.0.right/0.23.1848.1057@0.23.1848.1057" timestamp="1613308429456" />
     <state width="1878" height="133" key="GridCell.Tab.0.right/0.23.1920.977@0.23.1920.977" timestamp="1613248703975" />
     <state x="492" y="150" key="SettingsEditor" timestamp="1613242331788">
       <screen x="0" y="23" width="1920" height="977" />
